@@ -1,0 +1,20 @@
+{
+  "name": "food_app",
+  "version": "1.0.0",
+  "description": "Food delivery app",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel builde index.html",
+    "test": "jest"
+  },
+  "author": "Saurabh",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.10.0"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.16.0"
+  }
+}
