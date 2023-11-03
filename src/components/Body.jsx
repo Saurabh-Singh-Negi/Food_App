@@ -18,10 +18,10 @@ const Body = () => {
     const json = await data.json();
 
     setResData(
-      json.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     setDupResData(
-      json.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
 
