@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { RESTAURANT_API } from "../utils/constants";
 import RestaurantCard from "./RestaurantCard";
+import { useNavigate } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import "../../index.css";
 
@@ -8,7 +9,7 @@ const Body = () => {
   const [resData, setResData] = useState([]);
   const [dupResData, setDupResData] = useState([]);
   const [searchRes, setSearchRes] = useState("");
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetchData();
   }, []);
@@ -39,6 +40,10 @@ const Body = () => {
     );
   };
 
+  const handleRestroClick = (id) => {
+    navigate(`/restaurantmenu/${id}`);
+  };
+
   return resData.length === 0 ? (
     <Shimmer />
   ) : (
@@ -59,7 +64,12 @@ const Body = () => {
       </div>
       <div className="restaurant-cards">
         {dupResData.map((restaurant) => (
-          <RestaurantCard key={restaurant?.info?.id} resData={restaurant} />
+          <RestaurantCard
+            key={restaurant?.info?.id}
+            resId={restaurant?.info?.id}
+            resData={restaurant}
+            handleRestroClick={handleRestroClick}
+          />
         ))}
       </div>
     </div>
