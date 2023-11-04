@@ -1,11 +1,11 @@
 import { IMAGE_LINK } from "../utils/constants";
 import "../../index.css";
 
-const RestaurantCard = ({ resId, resData, handleRestroClick }) => {
+const RestaurantCard = ({ resData }) => {
   const { name, cuisines, avgRating, cloudinaryImageId } = resData?.info;
 
   return (
-    <div className="card" onClick={() => handleRestroClick(resId)}>
+    <div className="card">
       <img
         className="card-img"
         src={IMAGE_LINK + cloudinaryImageId}

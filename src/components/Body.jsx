@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { RESTAURANT_API } from "../utils/constants";
 import RestaurantCard from "./RestaurantCard";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import "../../index.css";
 
@@ -40,10 +40,6 @@ const Body = () => {
     );
   };
 
-  const handleRestroClick = (id) => {
-    navigate(`/restaurantmenu/${id}`);
-  };
-
   return resData.length === 0 ? (
     <Shimmer />
   ) : (
@@ -64,12 +60,12 @@ const Body = () => {
       </div>
       <div className="restaurant-cards">
         {dupResData.map((restaurant) => (
-          <RestaurantCard
+          <Link
             key={restaurant?.info?.id}
-            resId={restaurant?.info?.id}
-            resData={restaurant}
-            handleRestroClick={handleRestroClick}
-          />
+            to={`/restaurantmenu/${restaurant?.info?.id}`}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
