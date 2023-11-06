@@ -92,3 +92,8 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.online-status {
+  display: flex;
+  align-items: center;
+}
