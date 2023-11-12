@@ -6,5 +6,8 @@ export const RESTAURANT_API =
 export const IMAGE_LINK =
   "https://media-assets.swiggy.com/swiggy/image/upload/";
 
+// export const Restaurant_Menu_API =
+//   "https://www.swiggy.com/mapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9314583&lng=77.6299858&restaurantId=";
+
 export const Restaurant_Menu_API =
-  "https://www.swiggy.com/mapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9314583&lng=77.6299858&restaurantId=";
+  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9351929&lng=77.62448069999999&restaurantId=";

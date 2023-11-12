@@ -5,12 +5,16 @@ import { Link, useNavigate } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import "../../index.css";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { withPromotedLevel } from "./RestaurantCard";
 
 const Body = () => {
   const [resData, setResData] = useState([]);
   const [dupResData, setDupResData] = useState([]);
   const [searchRes, setSearchRes] = useState("");
   const navigate = useNavigate();
+
+  const RestaurantCardPromoted = withPromotedLevel(RestaurantCard);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -18,12 +22,11 @@ const Body = () => {
   const fetchData = async () => {
     const data = await fetch(RESTAURANT_API);
     const json = await data.json();
-
     setResData(
-      json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     setDupResData(
-      json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
 
@@ -70,7 +73,11 @@ const Body = () => {
             key={restaurant?.info?.id}
             to={`/restaurantmenu/${restaurant?.info?.id}`}
           >
-            <RestaurantCard resData={restaurant} />
+            {restaurant?.info?.promoted ? (
+              <RestaurantCardPromoted resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>
