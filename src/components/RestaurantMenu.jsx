@@ -2,10 +2,11 @@ import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import RestaurantCategory from "./RestaurantCategory";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { restaurantId } = useParams();
-
+  const [showIndex, setShowIndex] = useState(null);
   const resInfo = useRestaurantMenu(restaurantId);
   console.log("menu", resInfo);
   if (resInfo === null) {
@@ -13,11 +14,6 @@ const RestaurantMenu = () => {
   }
   const { cuisines, name, costForTwoMessage } =
     resInfo?.cards[0]?.card?.card?.info;
-
-  const { itemCards } =
-    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
-  const { carousel } =
-    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
 
   const categories =
     resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
@@ -34,7 +30,12 @@ const RestaurantMenu = () => {
       </p>
       <div className="flex flex-col">
         {categories.map((category, index) => (
-          <RestaurantCategory key={index} data={category.card?.card} />
+          <RestaurantCategory
+            key={index}
+            data={category.card?.card}
+            showItem={index === showIndex && true}
+            setShowIndex={() => setShowIndex(index)}
+          />
         ))}
       </div>
     </div>
