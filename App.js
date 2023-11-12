@@ -7,7 +7,7 @@ import Error from "./src/components/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestaurantMenu from "./src/components/RestaurantMenu";
 import { lazy, Suspense } from "react";
-
+import "./app.css";
 const About = lazy(() => import("./src/components/About"));
 
 function App() {

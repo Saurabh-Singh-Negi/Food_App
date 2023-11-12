@@ -1,12 +1,13 @@
 import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
   const { restaurantId } = useParams();
 
   const resInfo = useRestaurantMenu(restaurantId);
-  console.log(resInfo);
+  console.log("menu", resInfo);
   if (resInfo === null) {
     return <Shimmer />;
   }
@@ -17,25 +18,25 @@ const RestaurantMenu = () => {
     resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
   const { carousel } =
     resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
+
+  const categories =
+    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (ele) =>
+        ele.card?.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
+  console.log("asdf", categories);
   return (
-    <div>
-      <h1>{name}</h1>
-      <p>
+    <div className="w-1/2 mx-auto mt-5 ">
+      <h1 className="text-2xl font-bold">{name}</h1>
+      <p className="text-sm text-gray-400">
         {cuisines && cuisines.join(", ")} - {costForTwoMessage}
       </p>
-      <h2>Menu</h2>
-      {itemCards
-        ? itemCards.map((ele) => (
-            <p key={ele?.card?.info?.id}>
-              {ele?.card?.info?.name} -{" Rs."}
-              {ele?.card?.info?.price / 100}
-            </p>
-          ))
-        : carousel.map((ele) => (
-            <p key={ele?.dish?.info?.id}>
-              {ele?.dish?.info?.name} - {" Rs."} {ele?.dish?.info?.price / 100}
-            </p>
-          ))}
+      <div className="flex flex-col">
+        {categories.map((category, index) => (
+          <RestaurantCategory key={index} data={category.card?.card} />
+        ))}
+      </div>
     </div>
   );
 };
