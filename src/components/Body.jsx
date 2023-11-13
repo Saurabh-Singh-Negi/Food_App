@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RESTAURANT_API } from "../utils/constants";
 import RestaurantCard from "./RestaurantCard";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,13 +6,14 @@ import Shimmer from "./Shimmer";
 import "../../index.css";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { withPromotedLevel } from "./RestaurantCard";
+import UserContext from "../utils/UserContext.jsx";
 
 const Body = () => {
   const [resData, setResData] = useState([]);
   const [dupResData, setDupResData] = useState([]);
   const [searchRes, setSearchRes] = useState("");
   const navigate = useNavigate();
-
+  const { loggedInUser, setUserName } = useContext(UserContext);
   const RestaurantCardPromoted = withPromotedLevel(RestaurantCard);
 
   useEffect(() => {
@@ -55,7 +56,7 @@ const Body = () => {
     <div className="body">
       <div className="Filter-container">
         <input
-          className="search-box"
+          className="search-box  border-2 border-black p-2"
           type="text"
           value={searchRes}
           onChange={(e) => setSearchRes(e.target.value)}
@@ -66,6 +67,12 @@ const Body = () => {
         <button className="filter-btn" onClick={handleButtonClick}>
           Top Rated Restaurants
         </button>
+        <input
+          type="text"
+          className="border-2 border-black ml-2  p-2"
+          value={loggedInUser}
+          onChange={(e) => setUserName(e.target.value)}
+        />
       </div>
       <div className="restaurant-cards">
         {dupResData.map((restaurant) => (

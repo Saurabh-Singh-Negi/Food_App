@@ -3,9 +3,13 @@ import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { TiTick, TiTimes } from "react-icons/ti";
+import { useContext } from "react";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
   const isOnelineStatus = useOnlineStatus();
+
+  const { loggedInUser } = useContext(UserContext);
   return (
     <div className="header">
       <div>
@@ -25,6 +29,7 @@ const Header = () => {
         <li>
           <Link to="contact">Contact Us</Link>
         </li>
+        <li>{loggedInUser}</li>
         <li>Cart</li>
       </div>
     </div>
