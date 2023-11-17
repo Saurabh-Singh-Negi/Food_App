@@ -17,7 +17,7 @@ function App() {
   const [userName, setUserName] = useState("");
   useEffect(() => {
     const data = {
-      name: "Cool User",
+      name: "Admin",
     };
     setUserName(data.name);
   }, []);
