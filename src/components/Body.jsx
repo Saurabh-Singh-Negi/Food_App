@@ -23,6 +23,7 @@ const Body = () => {
   const fetchData = async () => {
     const data = await fetch(RESTAURANT_API);
     const json = await data.json();
+
     setResData(
       json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
@@ -75,7 +76,7 @@ const Body = () => {
         />
       </div>
       <div className="restaurant-cards">
-        {dupResData.map((restaurant) => (
+        {dupResData?.map((restaurant) => (
           <Link
             key={restaurant?.info?.id}
             to={`/restaurantmenu/${restaurant?.info?.id}`}

@@ -1,7 +1,15 @@
 import React from "react";
 import { IMAGE_LINK } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
+
 const ItemList = ({ item }) => {
-  console.log("items", item);
+  const dispatch = useDispatch();
+  const handleAdd = (ele) => {
+    console.log("item is ", ele);
+    dispatch(addItem(ele));
+  };
+
   return (
     <div>
       {item.map((ele) => (
@@ -21,6 +29,13 @@ const ItemList = ({ item }) => {
             </p>
           </div>
           <div className="w-2/12 ">
+            <button
+              className="bg-black text-white px-2 rounded absolute ml-5 flex "
+              onClick={() => handleAdd(ele)}
+            >
+              Add
+              <span>+</span>
+            </button>
             <img
               className="rounded-lg"
               src={IMAGE_LINK + ele.card?.info?.imageId}

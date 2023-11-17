@@ -5,11 +5,14 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 import { TiTick, TiTimes } from "react-icons/ti";
 import { useContext } from "react";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const isOnelineStatus = useOnlineStatus();
-
   const { loggedInUser } = useContext(UserContext);
+
+  const cartItems = useSelector((store) => store.cart.items);
+
   return (
     <div className="header">
       <div>
@@ -30,7 +33,10 @@ const Header = () => {
           <Link to="contact">Contact Us</Link>
         </li>
         <li>{loggedInUser}</li>
-        <li>Cart</li>
+
+        <li className="font-bold">
+          <Link to="cart">Cart ({cartItems.length}-items)</Link>
+        </li>
       </div>
     </div>
   );
